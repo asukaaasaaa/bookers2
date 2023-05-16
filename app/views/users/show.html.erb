@@ -62,7 +62,7 @@
 <tr><% @post_books.each do |book| %></tr>
 <td><%= image_tag @user.get_profile_image(80,80) %></td>
 <td><%=link_to book_path(book.id) do %><%= book.title %><% end %></td>
-<td><%= book.opinion %></td>
+<td><%= book.body %></td>
 <% end %>
 </tbody>
 </table>
