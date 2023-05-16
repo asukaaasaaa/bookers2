@@ -28,11 +28,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-      user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to books_path
-    end
-
+    is_matching_login_user
     @book  = Book.find(params[:id])
   end
 
@@ -44,13 +40,16 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(post_book_params)
-       flash[:notice] = "You have updated book successfully."
-       redirect_to book_path(book.id)
-    else
-       render :edit
-    end
+    is_matching_login_user
   end
+
+   def is_matching_login_user
+    book = Book.find(params[:id])
+    user = User.find(book.user_id)
+    unless user.id == current_user.id
+      redirect_to users_path
+    end
+   end
 
   # 投稿データのストロングパラメータ
   private
