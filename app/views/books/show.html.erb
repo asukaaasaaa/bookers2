@@ -48,8 +48,10 @@
             <% end %></td>
             <td><%=link_to book_path(params[:id]) do %><%= @books.title %><% end %></td>
             <td><%= @books.body %></td>
-            <td><%=link_to "Edit", edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to "destroy", book_path(@books), method: :delete, class: "btn btn-sm btn-danger" %></td>
+            <% if @books.user == current_user %>
+              <td><%=link_to "Edit", edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to "destroy", book_path(@books), method: :delete, class: "btn btn-sm btn-danger" %></td>
+            <% end %>
           </tr>
         </tbody>
       </table>
