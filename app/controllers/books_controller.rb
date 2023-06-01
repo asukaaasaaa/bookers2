@@ -19,6 +19,7 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @post_books = Book.all
+    @user = current_user
   end
 
 
